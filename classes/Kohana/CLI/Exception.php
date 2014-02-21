@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Exception class for minion CLI.
+ * CLI exception class.
  *
- * @package    Kohana/Minion
+ * @package    Kohana/CLI
  * @category   Exception
  * @author     Kohana Team
  * @copyright  (c) 2009-2014 Kohana Team
