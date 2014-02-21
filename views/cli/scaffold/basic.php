@@ -9,7 +9,7 @@
  * @copyright (c) <?php echo date('Y').' '.$author ?>
  * @license   http://kohanaframework.org/license
  */
-class Controller_CLI_<?php echo $name ?> extends Controller_CLI {
+class <?php echo $name ?> extends Controller_CLI {
 
 	/**
 	 * @var array controller options as array of option name => default values

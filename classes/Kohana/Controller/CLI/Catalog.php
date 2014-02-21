@@ -8,13 +8,16 @@
  * @copyright  (c) 2013-2014 Kohana Team
  * @license    http://kohanaframework.org/license
  */
-abstract class Kohana_Controller_CLI_List extends Controller_CLI_Template {
+abstract class Kohana_Controller_CLI_Catalog extends Controller_CLI_Template {
 
 	/**
+	 * Show list of CLI controllers.
 	 *
+	 * @return void
 	 */
-	public function action() {
-		// todo
+	public function action()
+	{
+		$this->template->catalog = CLI_Manager::catalog();
 	}
 
 }

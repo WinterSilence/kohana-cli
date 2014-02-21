@@ -9,7 +9,7 @@
  * @copyright (c) <?php echo date('Y').' '.$author ?>
  * @license   http://kohanaframework.org/license
  */
-class Controller_CLI_<?php echo $name ?> extends Controller_CLI_Template {
+class <?php echo $class ?> extends Controller_CLI_Template {
 
 	/**
 	 * @var array controller options as array of option name => default values
@@ -19,7 +19,7 @@ class Controller_CLI_<?php echo $name ?> extends Controller_CLI_Template {
 	/**
 	 * @var string|object path to template or [View] object
 	 */
-	public $template = '<?php echo $template ?>';
+	public $template = '<?php echo CLI_Manager::class2path($class) ?>';
 
 	/**
 	 * @var boolean auto render template

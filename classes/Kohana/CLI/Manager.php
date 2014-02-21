@@ -13,10 +13,13 @@ abstract class Kohana_CLI_Manager {
 	// Parent class for CLI controllers
 	const PARENT_CLASS = 'Controller_CLI';
 
+	// Directory with CLI controllers
+	const DIR_ROOT = 'classes/Controller/CLI';
+	
 	/**
 	 * @var string default controller name
 	 */
-	public static $default = 'list';
+	public static $default = 'catalog';
 
 	/**
 	 * Convert controller class to name.
@@ -86,6 +89,82 @@ abstract class Kohana_CLI_Manager {
 		$name = str_replace(array('\\', '/'), ' ', $name);
 		$name = ucwords($name);
 		return CLI_Manager::PARENT_CLASS.'_'.str_replace(' ', '_', $name);
+	}
+
+	/**
+	 * Gets list of CLI controllers.
+	 * 
+	 *     $catalog = CLI_Manager::catalog();
+	 * 
+	 * @return array
+	 * @uses   Kohana::cache
+	 * @uses   Arr::flatten
+	 */
+	public static function catalog()
+	{
+		if ($catalog = Kohana::cache(__METHOD__))
+		{
+			return $catalog;
+		}
+
+		$catalog = Kohana::list_files(CLI_Manager::DIR_ROOT);
+		$catalog = Arr::flatten($catalog);
+		$catalog = array_keys($catalog);
+
+		if (Kohana::$caching)
+		{
+			Kohana::cache(__METHOD__, $catalog, 3600);
+		}
+
+		return $catalog;
+	}
+
+	/**
+	 * Gets information about CLI controller.
+	 * 
+	 *     $info = CLI_Manager::info($name);
+	 * 
+	 * @param  string|object $name
+	 * @return array
+	 */
+	public static function info($name)
+	{
+		if (is_object($name))
+		{
+			$name = CLI_Manager::class2name($name);
+		}
+
+		if ($info = Kohana::cache(__METHOD__.$name))
+		{
+			return $info;
+		}
+
+		$class = CLI_Manager::name2class($name);
+
+		$controller = new ReflectionClass($class);
+
+		$description = $controller->getDocComment();
+		// Normalize all new lines to \n
+		$description = str_replace(array("\r\n", "\n"), "\n", $description);
+		// Remove the phpdoc open\close tags and split
+		$description = array_slice(explode("\n", $description), 1, -1);
+		foreach ($description as $i => $line)
+		{
+			// Remove all leading whitespace
+			$description[$i] = preg_replace('/^\s*\* ?/m', '', $line);
+		}
+		$description = implode(PHP_EOL, $description);
+
+		$options = $controller->getProperty('options')->getValue();
+
+		$info = compact('name', 'class', 'description', 'options');
+
+		if (Kohana::$caching)
+		{
+			Kohana::cache(__METHOD__.$name, $info, 3600);
+		}
+
+		return $info;
 	}
 
 	/**
