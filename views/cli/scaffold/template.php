@@ -5,8 +5,8 @@
  *
  * @package   Kohana/CLI
  * @category  Controller
- * @author    <?php echo $author ?>
- * @copyright (c) <?php echo date('Y').' '.$author ?>
+ * @author    Kohana Team
+ * @copyright (c) <?php echo date('Y') ?> Kohana Team
  * @license   http://kohanaframework.org/license
  */
 class <?php echo $class ?> extends Controller_CLI_Template {

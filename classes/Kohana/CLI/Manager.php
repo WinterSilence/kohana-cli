@@ -14,7 +14,7 @@ abstract class Kohana_CLI_Manager {
 	const PARENT_CLASS = 'Controller_CLI';
 
 	// Directory with CLI controllers
-	const DIR_ROOT = 'classes/Controller/CLI';
+	const DIR_ROOT = 'classes/Controller/CLI/';
 	
 	/**
 	 * @var string default controller name
@@ -86,7 +86,7 @@ abstract class Kohana_CLI_Manager {
 			);
 		}
 
-		$name = str_replace(array('\\', '/'), ' ', $name);
+		$name = str_replace(array('\\', '/', ' '), ' ', $name);
 		$name = ucwords($name);
 		return CLI_Manager::PARENT_CLASS.'_'.str_replace(' ', '_', $name);
 	}

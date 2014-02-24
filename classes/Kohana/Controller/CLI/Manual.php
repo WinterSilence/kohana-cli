@@ -13,7 +13,7 @@ abstract class Kohana_Controller_CLI_Manual extends Controller_CLI_Template {
 	/**
 	 * @var array Presets for controller options as array of option name => default values
 	 */
-	public $options = array('class' => NULL);
+	public $options = array('class' => '');
 
 	/**
 	 * Sets option 'class' if it's not exist.
@@ -23,7 +23,7 @@ abstract class Kohana_Controller_CLI_Manual extends Controller_CLI_Template {
 	 */
 	public function before()
 	{
-		if ( ! isset($this->options['class']))
+		if (empty($this->options['class']))
 		{
 			$this->options['class'] = CLI::read(__('Controller name'));
 		}

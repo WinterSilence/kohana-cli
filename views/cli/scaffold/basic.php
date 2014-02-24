@@ -5,11 +5,11 @@
  *
  * @package   Kohana/CLI
  * @category  Controller
- * @author    <?php echo $author ?>
- * @copyright (c) <?php echo date('Y').' '.$author ?>
+ * @author    Kohana Team
+ * @copyright (c) <?php echo date('Y') ?> Kohana Team
  * @license   http://kohanaframework.org/license
  */
-class <?php echo $name ?> extends Controller_CLI {
+class <?php echo $class ?> extends Controller_CLI {
 
 	/**
 	 * @var array controller options as array of option name => default values
