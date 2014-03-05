@@ -4,7 +4,7 @@
 	"description": "The Kohana module for work in CLI",
 	"homepage":    "http://kohanaframework.org",
 	"license":     "BSD-3-Clause",
-	"keywords":    ["kohana", "framework", "cli", "console"],
+	"keywords":    ["kohana", "framework", "cli", "console", "task"],
 	"authors": [
 		{
 			"name":     "Kohana Team",

@@ -24,9 +24,9 @@ foreach ($options as $option => $default)
 }
 ?>
 
-<?php echo CLI::color(__('Show controller manual'), 'light_gray') ?>
+<?php echo CLI::color(__('Show task manual'), 'light_gray') ?>
 -------------------------------------------------
-php <?php echo CLI::script() ?> --name=manual --class=<?php echo $name ?>
+php <?php echo CLI::script() ?> --task=manual --name=<?php echo $name ?>
 
 <?php if (Kohana::$caching) Fragment::save() ?>
 <?php endif ?>

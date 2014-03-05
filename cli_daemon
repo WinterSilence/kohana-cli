@@ -5,15 +5,15 @@
 # - PHP process is monitored and restarted if it exits for any reason
 # - Added handlers for SUGHUP, SIGINT, and SIGTERM
 #
-# This is meant for long running CLI controllers (like background workers).
-# Shutting down the CLI controllers is done by sending a SIGINT or SIGTERM signal
-# to this cli_daemon process. You can also restart the CLI controller by sending a
+# This is meant for long running CLI tasks (like background workers).
+# Shutting down the CLI tasks is done by sending a SIGINT or SIGTERM signal
+# to this cli_daemon process. You can also restart the CLI task by sending a
 # SUGHUP signal to this process. It's useful to restart all your workers when
 # deploying new code so that the workers reload their code as well.
-# You cannot use this script for controllers that require user input because of the
+# You cannot use this script for tasks that require user input because of the
 # PHP process running in the background.
 #
-# Usage: ./cli_daemon [--name=value] [--option1=value1 --option2=value2]
+# Usage: ./cli_daemon --task=value [--option1=value1] [--option2=value2]
 #
 # And so on.
 #

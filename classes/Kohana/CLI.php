@@ -1,7 +1,10 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Helper class for CLI: interact with the command line  
- * by accepting input options, parameters and output text.
+ * Helper class, interact with the command line by accepting input options.
+ * 
+ * - Gets command line arguments
+ * - Input values ​​of variables
+ * - Output text and errors
  *
  * @package   Kohana/CLI
  * @category  Helper
@@ -12,14 +15,14 @@
 abstract class Kohana_CLI {
 
 	/**
-	 * @var boolean Whether to use colored text, uses in [CLI::color()].
-	 */
-	public static $multicolor = FALSE;
-
-	/**
 	 * @var array options passed to script
 	 */
 	protected static $_options;
+
+	/**
+	 * @var boolean Whether to use colored text
+	 */
+	public static $multicolor = FALSE;
 
 	/**
 	 * @var array colour designations of the text
@@ -70,8 +73,8 @@ abstract class Kohana_CLI {
 	}
 
 	/**
-	 * Sets options from [CLI arguments](http://php.net/manual/reserved.variables.argv.php) 
-	 * and gets option value or array of options values.
+	 * Sets options as [CLI arguments](http://php.net/manual/reserved.variables.argv.php) 
+	 * and gets value or array values of options.
 	 * If getting option does not exist, the default value will be returned instead.
 	 *
 	 *     echo CLI::option('type', 'basic');
@@ -225,19 +228,22 @@ abstract class Kohana_CLI {
 	/**
 	 * Returns the given text with the correct color codes for foreground and (optional) background color.
 	 * 
+	 * 
 	 *     // Print light gray text:
 	 *     CLI::write(CLI::color($text, 'light_gray'));
 	 * 
 	 * @param  string      $text       highlight text
-	 * @param  string      $foreground foreground color of the text
-	 * @param  string|null $background background color of the text
+	 * @param  string      $foreground foreground color of text, uses [CLI::$_foreground_colors]
+	 * @param  string|null $background background color of text, uses [CLI::$_background_colors]
 	 * @return string
 	 * @throws CLI_Exception
+	 * @uses   Kohana::$is_windows
 	 */
 	public static function color($text, $foreground, $background = NULL)
 	{
 		if (Kohana::$is_windows AND CLI::$multicolor === FALSE)
 		{
+			// If color text not support return text `as is`
 			return $text;
 		}
 

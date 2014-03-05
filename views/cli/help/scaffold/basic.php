@@ -1,47 +1,47 @@
 <?php defined('SYSPATH') OR die('No direct script access.') ?>
 <?php echo Kohana::FILE_SECURITY ?>
 /**
- * CLI controller class.
+ * CLI task class.
  *
  * @package   Kohana/CLI
- * @category  Controller
+ * @category  Task
  * @author    Kohana Team
  * @copyright (c) <?php echo date('Y') ?> Kohana Team
  * @license   http://kohanaframework.org/license
  */
-class <?php echo $class ?> extends Controller_CLI {
+class <?php echo $class ?> extends CLI_Task {
 
 	/**
-	 * @var array controller options as array of option name => default values
+	 * @var array task options as array of option name => default values
 	 */
-	public $options = array();
+	protected $options = array();
 
 	/**
-	 * Automatically executed after the controller action.
+	 * Automatically executed after the task action.
 	 *
 	 * @return void
 	 */
-	public function before()
+	protected function before()
 	{
 		// ...
 	}
 
 	/**
-	 * Controller action.
+	 * Task action.
 	 *
 	 * @return void
 	 */
-	public function action()
+	protected function action()
 	{
 		// ...
 	}
 
 	/**
-	 * Automatically executed after the controller action.
+	 * Automatically executed after the task action.
 	 *
 	 * @return void
 	 */
-	public function after()
+	protected function after()
 	{
 		// ...
 	}
