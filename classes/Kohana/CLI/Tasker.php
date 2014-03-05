@@ -19,7 +19,7 @@ abstract class Kohana_CLI_Tasker {
 	/**
 	 * @var string name of default task
 	 */
-	public static $default = 'list';
+	public static $default = 'help/list';
 
 	/**
 	 * Convert class to task name.
