@@ -193,36 +193,31 @@ abstract class Kohana_CLI {
 	 * 
 	 *     CLI::write($text);
 	 * 
-	 * @param  string|array $text string to output, or array of strings
+	 * @param  string|array $text    string to output, or array of strings
+	 * @param  string       $handler stream handler, use [CLI constants for I/O streams](http://php.net/manual/features.commandline.io-streams.php)
 	 * @return void
 	 */
-	public static function write($text = '')
+	public static function write($text = '', $handler = STDOUT)
 	{
 		if (is_array($text))
 		{
 			$text = implode(PHP_EOL, $text);
 		}
 
-		fwrite(STDOUT, $text);
+		fwrite($handler, $text);
 	}
 
 	/**
-	 * Outputs a error string to the CLI.
-	 * If you send an array it will implode them with a line break.
+	 * Outputs a error to the CLI.
 	 * 
 	 *     CLI::error($text);
 	 * 
-	 * @param  string|array $text error string to output or array of errors
+	 * @param  string|array $text error string or array of errors
 	 * @return void
 	 */
 	public static function error($text = '')
 	{
-		if (is_array($text))
-		{
-			$text = implode(PHP_EOL, $text);
-		}
-
-		fwrite(STDERR, $text);
+		CLI::write($text, STDERR);
 	}
 
 	/**
