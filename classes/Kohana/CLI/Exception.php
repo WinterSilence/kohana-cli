@@ -24,7 +24,7 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 	{
 		try
 		{
-			$error = ($e instanceof CLI_Exception) ? $e->_cli_text() : Kohana_Exception::text($e);
+			$error = ($e instanceof CLI_Exception) ? $e->_cli_text() : parent::text($e);
 			CLI::error($error);
 
 			$exit_code = $e->getCode();
@@ -33,12 +33,13 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 				// Never exit '0' after an exception
 				$exit_code = 1;
 			}
+
 			exit($exit_code);
 		}
 		catch (Exception $e)
 		{
 			// Display the exception text
-			CLI::error(Kohana_Exception::text($e));
+			CLI::error(parent::text($e));
 
 			// Exit with an error status
 			exit(1);
@@ -52,7 +53,7 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 	 */
 	protected function _cli_text()
 	{
-		return Kohana_Exception::text($this);
+		return parent::text($this);
 	}
 
 }

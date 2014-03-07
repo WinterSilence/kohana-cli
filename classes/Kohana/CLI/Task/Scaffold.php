@@ -13,7 +13,7 @@ abstract class Kohana_CLI_Task_Scaffold {
 	/**
 	 * @var array task templates as array of short name => path to template file
 	 */
-	public $templates = array(
+	public static $templates = array(
 		'basic'    => 'cli/help/scaffold/basic', 
 		'template' => 'cli/help/scaffold/template', 
 	);
@@ -21,13 +21,14 @@ abstract class Kohana_CLI_Task_Scaffold {
 	/**
 	 * Create ClI task class and save in file.
 	 * 
+	 *     CLI_Task_Scaffold::create('db/migrate', 'template');
+	 * 
 	 * @param  string $name     task name
 	 * @param  string $template class template, uses [CLI_Task_Scaffold::$templates]
 	 * @return void
 	 * @throws CLI_Exception
-	 * @uses   Text::ucfirst
 	 */
-	public function create($name, $template)
+	public static function create($name, $template)
 	{
 		// Generate task filename
 		$filename = APPPATH.CLI_Tasker::DIR_ROOT.Text::ucfirst($name, '/').EXT;
@@ -46,7 +47,7 @@ abstract class Kohana_CLI_Task_Scaffold {
 		// Create class content
 		$content = View::factory(
 			CLI_Task_Scaffold::$templates[$template], 
-			array('class' => CLI_Tasker::name2class($name))
+			array('kohana_cli_class' => CLI_Tasker::name2class($name))
 		);
 
 		// Save task content in file

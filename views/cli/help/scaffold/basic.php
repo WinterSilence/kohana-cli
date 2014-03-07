@@ -9,7 +9,7 @@
  * @copyright (c) <?php echo date('Y') ?> Kohana Team
  * @license   http://kohanaframework.org/license
  */
-class <?php echo $class ?> extends CLI_Task {
+class <?php echo $kohana_cli_class ?> extends CLI_Task {
 
 	/**
 	 * @var array task options as array of option name => default values

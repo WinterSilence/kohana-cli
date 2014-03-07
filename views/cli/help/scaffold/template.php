@@ -9,12 +9,12 @@
  * @copyright (c) <?php echo date('Y') ?> Kohana Team
  * @license   http://kohanaframework.org/license
  */
-class <?php echo $class ?> extends CLI_Task_Template {
+class <?php echo $kohana_cli_class ?> extends CLI_Task_Template {
 
 	/**
 	 * @var string|object path to template or [View] object
 	 */
-	protected $template = '<?php echo CLI_Tasker::class2path($class) ?>';
+	protected $template = '<?php echo CLI_Tasker::class2path($kohana_cli_class) ?>';
 
 	/**
 	 * @var boolean auto render template

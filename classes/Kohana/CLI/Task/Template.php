@@ -48,7 +48,7 @@ abstract class Kohana_CLI_Task_Template extends CLI_Task {
 	 */
 	protected function after()
 	{
-		if ($this->auto_render === TRUE)
+		if ($this->auto_render === TRUE AND $this->template instanceof View)
 		{
 			// Render and display template
 			CLI::write($this->template->render());

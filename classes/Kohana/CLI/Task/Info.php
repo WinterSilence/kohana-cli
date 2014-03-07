@@ -15,24 +15,31 @@ abstract class Kohana_CLI_Task_Info {
 	 * 
 	 *     $catalog = CLI_Task_Info::get_list();
 	 * 
+	 * @param  string $path path to root directory of tasks
 	 * @return array
-	 * @uses   Kohana::cache
-	 * @uses   Arr::flatten
 	 */
-	public static function get_list()
+	public static function get_list($path = CLI_Tasker::DIR_ROOT)
 	{
-		if ($catalog = Kohana::cache(__METHOD__))
+		if (Kohana::$caching)
 		{
-			return $catalog;
+			// Create cache key\tag for find task list
+			$cache_key = __METHOD__.'('.$path.')';
+
+			// Try load list from cache
+			if ($catalog = Kohana::cache($cache_key))
+			{
+				return $catalog;
+			}
 		}
 
-		$catalog = Kohana::list_files(CLI_Tasker::DIR_ROOT);
+		$catalog = Kohana::list_files($path);
 		$catalog = Arr::flatten($catalog);
 		$catalog = array_keys($catalog);
 
 		if (Kohana::$caching)
 		{
-			Kohana::cache(__METHOD__, $catalog, 3600);
+			// Cache task information
+			Kohana::cache($cache_key, $catalog, 3600);
 		}
 
 		return $catalog;
@@ -54,13 +61,16 @@ abstract class Kohana_CLI_Task_Info {
 			$name = CLI_Tasker::class2name($name);
 		}
 
-		// Create cache key\tag for find task information
-		$cache_key = __METHOD__.'('.$name.')';
-
-		// Try load information from cache
-		if ($info = Kohana::cache($cache_key))
+		if (Kohana::$caching)
 		{
-			return $info;
+			// Create cache key\tag for find task information
+			$cache_key = __METHOD__.'('.$name.')';
+
+			// Try load information from cache
+			if ($info = Kohana::cache($cache_key))
+			{
+				return $info;
+			}
 		}
 
 		// Convert task name to class name

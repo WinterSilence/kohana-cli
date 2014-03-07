@@ -37,7 +37,7 @@ abstract class Kohana_CLI_Task_Help_Manual extends CLI_Task_Template {
 	protected function action()
 	{
 		$info = CLI_Task_Info::get_info($this->options['name']);
-		$this->template->set($info);
+		$this->template->set('kohana_cli_task', $info);
 	}
 
 }

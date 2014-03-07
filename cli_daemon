@@ -13,7 +13,7 @@
 # You cannot use this script for tasks that require user input because of the
 # PHP process running in the background.
 #
-# Usage: ./cli_daemon --task=value [--option1=value1] [--option2=value2]
+# Usage: ./cli_daemon --task=<name> [--option1=<value1>] [--option2=<value2>]
 #
 # And so on.
 #

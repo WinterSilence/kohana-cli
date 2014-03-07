@@ -122,8 +122,7 @@ abstract class Kohana_CLI_Tasker {
 				array(':method' => __METHOD__, ':class' => $class)
 			);
 		}
-		
-		if ( ! is_subclass_of($class, CLI_Tasker::PARENT_CLASS))
+		elseif ( ! is_subclass_of($class, CLI_Tasker::PARENT_CLASS))
 		{
 			throw new CLI_Exception(
 				'Method :method: class `:class` not extended `:parent`', 

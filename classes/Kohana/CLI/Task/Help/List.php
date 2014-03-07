@@ -17,7 +17,7 @@ abstract class Kohana_CLI_Task_Help_List extends CLI_Task_Template {
 	 */
 	protected function action()
 	{
-		$this->template->tasks = CLI_Task_Info::get_list();
+		$this->template->kohana_cli_tasks = CLI_Task_Info::get_list();
 	}
 
 }
