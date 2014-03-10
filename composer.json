@@ -23,7 +23,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"master": "stable",
+			"master": "stable"
 		}
 	}
 }
