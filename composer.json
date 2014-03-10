@@ -1,23 +1,21 @@
 {
-	"name":        "kohana/cli",
+	"name":        "wintersilence/cli",
 	"type":        "kohana-module",
 	"description": "The Kohana module for work in CLI",
-	"homepage":    "http://kohanaframework.org",
+	"homepage":    "http://github.com/wintersilence/kohana-cli",
 	"license":     "BSD-3-Clause",
 	"keywords":    ["kohana", "framework", "cli", "console", "task"],
 	"authors": [
 		{
-			"name":     "Kohana Team",
-			"email":    "team@kohanaframework.org",
-			"homepage": "http://kohanaframework.org/team",
+			"name":     "WinterSilence",
+			"email":    "info@handy-soft.ru",
+			"homepage": "http://handy-soft.ru",
 			"role":     "developer"
 		}
 	],
 	"support": {
-		"issues":   "http://dev.kohanaframework.org",
-		"forum":    "http://forum.kohanaframework.org",
-		"irc":      "irc://irc.freenode.net/kohana",
-		"source":   "http://github.com/kohana/core"
+		"issues":   "http://github.com/wintersilence/kohana-cli/issues",
+		"source":   "http://github.com/wintersilence/kohana-cli"
 	},
 	"require": {
 		"composer/installers": "~1.0",
