@@ -20,10 +20,5 @@
 		"composer/installers": "~1.0",
 		"kohana/core":         ">=3.3",
 		"php":                 ">=5.4"
-	},
-	"extra": {
-		"branch-alias": {
-			"master": "stable"
-		}
 	}
 }
