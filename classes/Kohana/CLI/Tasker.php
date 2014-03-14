@@ -138,5 +138,4 @@ abstract class Kohana_CLI_Tasker {
 
 		return $class;
 	}
-
 }
