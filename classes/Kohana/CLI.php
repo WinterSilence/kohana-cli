@@ -73,7 +73,7 @@ abstract class Kohana_CLI {
 	}
 
 	/**
-	 * Sets options as [CLI arguments](http://php.net/manual/reserved.variables.argv.php) 
+	 * Sets options as [CLI arguments](http://php.net/argv) 
 	 * and gets value or array values of options.
 	 * If getting option does not exist, the default value will be returned instead.
 	 *
@@ -194,7 +194,7 @@ abstract class Kohana_CLI {
 	 *     CLI::write($text);
 	 * 
 	 * @param  string|array $text    string to output, or array of strings
-	 * @param  string       $handler stream handler, use [CLI constants for I/O streams](http://php.net/manual/features.commandline.io-streams.php)
+	 * @param  string       $handler stream handler, use [CLI constants for I/O streams](http://php.net/commandline.io-streams)
 	 * @return void
 	 */
 	public static function write($text = '', $handler = STDOUT)
@@ -267,5 +267,4 @@ abstract class Kohana_CLI {
 
 		return $colored_text;
 	}
-
 }

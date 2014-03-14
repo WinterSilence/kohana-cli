@@ -9,7 +9,6 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task_Help_List extends CLI_Task_Template {
-
 	/**
 	 * Set list of tasks.
 	 *
@@ -19,5 +18,4 @@ abstract class Kohana_CLI_Task_Help_List extends CLI_Task_Template {
 	{
 		$this->template->kohana_cli_tasks = CLI_Task_Info::get_list();
 	}
-
 }

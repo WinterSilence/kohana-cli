@@ -44,5 +44,4 @@ abstract class Kohana_CLI_Task_Help_Scaffold extends CLI_Task {
 		CLI_Task_Scaffold::create($this->options['name'], $this->options['template']);
 		CLI::write(__('Task `:name` created!', array(':name' => $this->options['name'])));
 	}
-
 }

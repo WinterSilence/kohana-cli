@@ -24,7 +24,7 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 	{
 		try
 		{
-			$error = ($e instanceof CLI_Exception) ? $e->_cli_text() : parent::text($e);
+			$error = $e instanceof CLI_Exception ? $e->_cli_text() : parent::text($e);
 			CLI::error($error);
 
 			$exit_code = $e->getCode();
