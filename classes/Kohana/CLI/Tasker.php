@@ -9,7 +9,6 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Tasker {
-
 	// Parent class of CLI tasks
 	const PARENT_CLASS = 'CLI_Task';
 
@@ -17,7 +16,7 @@ abstract class Kohana_CLI_Tasker {
 	const DIR_ROOT = 'classes/CLI/Task/';
 
 	/**
-	 * @var string name of default task
+	 * @var string Name of default task
 	 */
 	public static $default = 'help/list';
 
@@ -27,7 +26,7 @@ abstract class Kohana_CLI_Tasker {
 	 *     echo CLI_Tasker::class2name('CLI_Task_DB_Migrate');
 	 *     // Result: 'db/migrate'
 	 * 
-	 * @param  object|string $class class name or [CLI_Task] object
+	 * @param  object|string $class Class name or [CLI_Task] object
 	 * @return string
 	 * @throws CLI_Exception
 	 */
@@ -38,19 +37,19 @@ abstract class Kohana_CLI_Tasker {
 			$class = get_class($class);
 		}
 
-		if ( ! is_subclass_of($class, CLI_Tasker::PARENT_CLASS))
+		if ( ! is_subclass_of($class, static::PARENT_CLASS))
 		{
 			throw new CLI_Exception(
-				'Method :method: class `:class` not extended `:parent`', 
+				':method: class `:class` not extended `:parent`', 
 				array(
 					':method' => __METHOD__, 
 					':class' => $class, 
-					':parent' => CLI_Tasker::PARENT_CLASS
+					':parent' => static::PARENT_CLASS
 				)
 			);
 		}
 
-		$class = substr($class, strlen(CLI_Tasker::PARENT_CLASS) + 1);
+		$class = substr($class, strlen(static::PARENT_CLASS) + 1);
 		$class = strtolower($class);
 		return str_replace('_', DIRECTORY_SEPARATOR, $class);
 	}
@@ -61,12 +60,12 @@ abstract class Kohana_CLI_Tasker {
 	 *     echo CLI_Tasker::class2path('CLI_Task_DB_Migrate');
 	 *     // Result: 'cli/db/migrate'
 	 * 
-	 * @param  object|string $class class name or or [CLI_Task] object
+	 * @param  object|string $class Сlass name or or [CLI_Task] object
 	 * @return string
 	 */
 	public static function class2path($class)
 	{
-		$path = CLI_Tasker::class2name($class);
+		$path = static::class2name($class);
 		return 'cli'.DIRECTORY_SEPARATOR.$path;
 	}
 
@@ -76,7 +75,7 @@ abstract class Kohana_CLI_Tasker {
 	 *     echo CLI_Tasker::name2class('db/migrate');
 	 *     // Result: 'CLI_Task_Db_Migrate'
 	 * 
-	 * @param  string $name task name
+	 * @param  string $name Task name
 	 * @return string
 	 * @throws CLI_Exception
 	 */
@@ -85,14 +84,14 @@ abstract class Kohana_CLI_Tasker {
 		if (empty($name) OR ! is_string($name))
 		{
 			throw new CLI_Exception(
-				'Method :method: wrong task name value', 
+				':method: wrong task name', 
 				array(':method' => __METHOD__)
 			);
 		}
 
 		$name = str_replace(array('\\', '/', ' '), ' ', $name);
 		$name = ucwords($name);
-		return CLI_Tasker::PARENT_CLASS.'_'.str_replace(' ', '_', $name);
+		return static::PARENT_CLASS.'_'.str_replace(' ', '_', $name);
 	}
 
 	/**
@@ -100,9 +99,9 @@ abstract class Kohana_CLI_Tasker {
 	 * 
 	 *     CLI_Tasker::factory(CLI::option('task'), CLI::option())->execute();
 	 * 
-	 * @param  string $name    task name
-	 * @param  array  $options values of options 
-	 * @return instance of [CLI_Task]
+	 * @param  string $name    Task name
+	 * @param  array  $options Task options 
+	 * @return object Instance of [CLI_Task]
 	 * @throws CLI_Exception
 	 */
 	public static function factory($name = '', array $options = array())
@@ -110,26 +109,26 @@ abstract class Kohana_CLI_Tasker {
 		if (empty($name))
 		{
 			// Use default name if task not set
-			$name = CLI_Tasker::$default;
+			$name = static::$default;
 		}
 
-		$class = CLI_Tasker::name2class($name);
+		$class = static::name2class($name);
 
 		if ( ! class_exists($class))
 		{
 			throw new CLI_Exception(
-				'Method :method: class `:class` not exists', 
+				':method: class `:class` not exists', 
 				array(':method' => __METHOD__, ':class' => $class)
 			);
 		}
-		elseif ( ! is_subclass_of($class, CLI_Tasker::PARENT_CLASS))
+		elseif ( ! is_subclass_of($class, static::PARENT_CLASS))
 		{
 			throw new CLI_Exception(
-				'Method :method: class `:class` not extended `:parent`', 
+				':method: class `:class` not extended `:parent`', 
 				array(
 					':method' => __METHOD__, 
 					':class' => $class, 
-					':parent' => CLI_Tasker::PARENT_CLASS
+					':parent' => static::PARENT_CLASS
 				)
 			);
 		}

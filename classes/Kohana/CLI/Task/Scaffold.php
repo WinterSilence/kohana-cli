@@ -9,9 +9,8 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task_Scaffold {
-
 	/**
-	 * @var array task templates as array of short name => path to template file
+	 * @var array Task templates as array of short name => path to template file
 	 */
 	public static $templates = array(
 		'basic'    => 'cli/help/scaffold/basic', 
@@ -23,24 +22,24 @@ abstract class Kohana_CLI_Task_Scaffold {
 	 * 
 	 *     CLI_Task_Scaffold::create('db/migrate', 'template');
 	 * 
-	 * @param  string $name     task name
-	 * @param  string $template class template, uses [CLI_Task_Scaffold::$templates]
+	 * @param  string $name     Task name
+	 * @param  string $template Class template, uses [CLI_Task_Scaffold::$templates]
 	 * @return void
 	 * @throws CLI_Exception
 	 */
 	public static function create($name, $template)
 	{
 		// Generate task filename
-		$filename = APPPATH.CLI_Tasker::DIR_ROOT.Text::ucfirst($name, '/').EXT;
-		$filename = str_replace(array('_', '/'), DIRECTORY_SEPARATOR, $filename);
+		$file = APPPATH.CLI_Tasker::DIR_ROOT.Text::ucfirst($name, '/').EXT;
+		$file = str_replace(array('_', '/'), DIRECTORY_SEPARATOR, $file);
 
 		// Create task directory if it's not exist
-		$dirname = dirname($filename);
-		if ( ! is_dir($dirname) AND ! mkdir($dirname, 0755, TRUE))
+		$dir = dirname($file);
+		if ( ! is_dir($dir) AND ! mkdir($dir, 0755, TRUE))
 		{
 			throw new CLI_Exception(
-				'Method :method: can not create directory `:dirname`', 
-				array(':method' => __METHOD__, ':dirname' => $dirname)
+				'Method :method: can not create directory `:dir`', 
+				array(':method' => __METHOD__, ':dir' => $dir)
 			);
 		}
 
@@ -51,13 +50,12 @@ abstract class Kohana_CLI_Task_Scaffold {
 		);
 
 		// Save task content in file
-		if (file_put_contents($filename, $content) === FALSE)
+		if (file_put_contents($file, $content) === FALSE)
 		{
 			throw new CLI_Exception(
-				'Method :method: can not create file `:filename`', 
-				array(':method' => __METHOD__, ':filename' => $filename)
+				'Method :method: can not create file `:file`', 
+				array(':method' => __METHOD__, ':file' => $file)
 			);
 		}
 	}
-
 }

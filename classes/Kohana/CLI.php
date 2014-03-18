@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 /**
- * Helper class, interact with the command line by accepting input options.
+ * Helper class, interact with the command line by accepting input options:
  * 
  * - Gets command line arguments
  * - Input values ​​of variables
@@ -11,21 +11,21 @@
  * @author    Kohana Team
  * @copyright (c) 2009-2014 Kohana Team
  * @license   http://kohanaframework.org/license
+ * @link      http://php.net/commandline
  */
 abstract class Kohana_CLI {
-
-	/**
-	 * @var array options passed to script
-	 */
-	protected static $_options;
-
 	/**
 	 * @var boolean Whether to use colored text
 	 */
 	public static $multicolor = FALSE;
 
 	/**
-	 * @var array colour designations of the text
+	 * @var array Options passed to script
+	 */
+	protected static $_options;
+
+	/**
+	 * @var array Colour designations of the text
 	 */
 	protected static $_foreground_colors = array(
 		'black'        => '0;30',
@@ -47,7 +47,7 @@ abstract class Kohana_CLI {
 	);
 
 	/**
-	 * @var array colour designations of the background
+	 * @var array Colour designations of the background
 	 */
 	protected static $_background_colors = array(
 		'black'      => '40',
@@ -73,58 +73,83 @@ abstract class Kohana_CLI {
 	}
 
 	/**
-	 * Sets options as [CLI arguments](http://php.net/argv) 
-	 * and gets value or array values of options.
-	 * If getting option does not exist, the default value will be returned instead.
+	 * Sets options as [CLI arguments](http://php.net/argv) and gets value
+	 * or array values of options. If getting option does not exist,
+	 * the default value will be returned instead.
 	 *
 	 *     echo CLI::option('type', 'basic');
 	 * 
-	 * @param  string|array $name    option name or array of options
-	 * @param  mixed        $default default value
+	 * @param  string|array $name    Option name or array of options
+	 * @param  mixed        $default Default value
 	 * @return mixed
-	 * @uses   Arr::is_array
-	 * @uses   Arr::extract
-	 * @uses   Arr::get
 	 */
 	public static function option($name, $default = NULL)
 	{
 		// Sets options
-		if ( ! isset(CLI::$_options))
+		if ( ! isset(static::$_options))
 		{
-			CLI::$_options = array();
+			static::$_options = array();
 
 			foreach ($_SERVER['argv'] as $i => $option)
 			{
-				if ($i === 0 OR strpos($option, '--') !== 0)
+				if ($i == 0 OR strpos($option, '--') !== 0)
 				{
-					// Skip the first argument (it's always the name that was used to run the script)
+					// Skip the first argument - it's always the script name
 					// and arguments without list separator '--'.
 					continue;
 				}
-
 				// Remove the list separator '--'
 				$option = substr($option, 2);
 
 				if (strpos($option, '=') !== FALSE)
 				{
 					list ($option, $value) = explode('=', $option, 2);
-					CLI::$_options[$option] = trim($value, '\'"');
+					static::$_options[$option] = trim($value, '\'"');
 				}
 				else
 				{
-					CLI::$_options[$option] = NULL;
+					static::$_options[$option] = NULL;
 				}
 			}
 		}
 
-		// Get options
-		if (Arr::is_array($name))
+		if (is_array($name))
 		{
-			return Arr::extract(CLI::$_options, $name, $default);
+			// Create array containing the default values
+			$defaults = array_fill_keys($name, $default);
+			// Create array containing the intersection of arrays options and defaults
+			$options = array_intersect_key(static::$_options, $defaults);
+			// Get options as merged array of selected options and defaults
+			return array_merge($defaults, $options);
 		}
-
 		// Get option
-		return Arr::get(CLI::$_options, $name, $default);
+		return isset(static::$_options[$name]) ? static::$_options[$name] : $default;
+	}
+
+	/**
+	 * Outputs a string to the CLI.
+	 * If you send an array it will implode them with a line break.
+	 * 
+	 *     // Display text
+	 *     CLI::write($text);
+	 *     // Display error
+	 *     CLI::write($error, STDERR);
+	 * 
+	 * @param  string|array $text   String to output, or array of strings
+	 * @param  resource     $handle Pointer of output stream (STDOUT, STDERR)
+	 * @return void
+	 */
+	public static function write($text = '', $handle = STDOUT)
+	{
+		if (is_array($text))
+		{
+			$text = implode(PHP_EOL, $text);
+		}
+		if ($handle != STDOUT)
+		{
+			$handle = STDERR;
+		}
+		fwrite($handle, $text);
 	}
 
 	/**
@@ -139,21 +164,20 @@ abstract class Kohana_CLI {
 	 *     // Will only accept the options in the assoc array of value => label:
 	 *     $ready = CLI::read('Are you ready?', array('y' => 'yes','n' => 'no'));
 	 *
-	 * @param  string $text    text to show user before waiting for input
-	 * @param  array  $options array of options the user is shown
+	 * @param  string $text    Text to show user before waiting for input
+	 * @param  array  $options Array of options the user is shown
 	 * @return string
-	 * @uses   Arr::is_assoc
 	 */
 	public static function read($text = '', array $options = array())
 	{
-		if ( ! empty($options))
+		if (empty($options))
 		{
 			$options_output = '';
 		}
 		else
 		{
 			// If a question has been asked with the read
-			$is_assoc = Arr::is_assoc($options);
+			$is_assoc = ( ! isset($options[0]));
 
 			if ($is_assoc)
 			{
@@ -170,17 +194,17 @@ abstract class Kohana_CLI {
 			}
 		}
 
-		fwrite(STDOUT, $text.$options_output.': ');
+		static::write($text.$options_output.': ');
 		
-		// Read the input from keyboard.
+		// Read the input from keyboard
 		$input = trim(fgets(STDIN));
 
-		// If options are provided and the choice is not in the array, tell them to try again.
+		// If options are provided and the choice is not exist, tell them to try again
 		if ( ! empty($options) AND ! ($is_assoc ? isset($options[$input]) : in_array($input, $options)))
 		{
-			CLI::write(__('Invalid option value. Please try again.'));
+			static::write(__('Invalid option value, try again'));
 			// Read option value again
-			$input = CLI::read($text, $options);
+			$input = static::read($text, $options);
 		}
 
 		// Read the input
@@ -188,79 +212,45 @@ abstract class Kohana_CLI {
 	}
 
 	/**
-	 * Outputs a string to the CLI.
-	 * If you send an array it will implode them with a line break.
-	 * 
-	 *     CLI::write($text);
-	 * 
-	 * @param  string|array $text    string to output, or array of strings
-	 * @param  string       $handler stream handler, use [CLI constants for I/O streams](http://php.net/commandline.io-streams)
-	 * @return void
-	 */
-	public static function write($text = '', $handler = STDOUT)
-	{
-		if (is_array($text))
-		{
-			$text = implode(PHP_EOL, $text);
-		}
-
-		fwrite($handler, $text);
-	}
-
-	/**
-	 * Outputs a error to the CLI.
-	 * 
-	 *     CLI::error($text);
-	 * 
-	 * @param  string|array $text error string or array of errors
-	 * @return void
-	 */
-	public static function error($text = '')
-	{
-		CLI::write($text, STDERR);
-	}
-
-	/**
-	 * Returns the given text with the correct color codes for foreground and (optional) background color.
-	 * 
+	 * Returns the given text with the correct color codes for foreground and (OPTIONAL) background color.
 	 * 
 	 *     // Print light gray text:
 	 *     CLI::write(CLI::color($text, 'light_gray'));
 	 * 
-	 * @param  string      $text       highlight text
-	 * @param  string      $foreground foreground color of text, uses [CLI::$_foreground_colors]
-	 * @param  string|null $background background color of text, uses [CLI::$_background_colors]
+	 * @param  string $text       Highlight text
+	 * @param  string $foreground Foreground color of text, use key of [CLI::$_foreground_colors]
+	 * @param  string $background Background color of text, use key of [CLI::$_background_colors]
 	 * @return string
 	 * @throws CLI_Exception
 	 * @uses   Kohana::$is_windows
 	 */
-	public static function color($text, $foreground, $background = NULL)
+	public static function color($text, $foreground, $background = '')
 	{
-		if (Kohana::$is_windows AND CLI::$multicolor === FALSE)
+		if (Kohana::$is_windows AND static::$multicolor)
 		{
-			// If color text not support return text `as is`
+			// If color text not support return text "as is"
 			return $text;
 		}
 
-		if ( ! isset(CLI::$_foreground_colors[$foreground]))
+		if ( ! isset(static::$_foreground_colors[$foreground]))
 		{
 			throw new CLI_Exception(
-				'Method :method: invalid foreground color `:color`.', 
+				':method: invalid foreground color `:color`', 
 				array(':method' => __METHOD__, ':color' => $foreground)
 			);
 		}
-		$colored_text = "\033[".CLI::$_foreground_colors[$foreground]."m";
+		$colored_text = "\033[".static::$_foreground_colors[$foreground]."m";
 
-		if ($background !== NULL)
+		if ($background)
 		{
-			if ( ! isset(CLI::$_background_colors[$background]))
+			if ( ! isset(static::$_background_colors[$background]))
 			{
 				throw new CLI_Exception(
-					'Method :method: invalid background color `:color`.',
+					':method: invalid background color `:color`',
 					array(':method' => __METHOD__, ':color' => $background)
 				);
 			}
-			$colored_text .= "\033[".CLI::$_background_colors[$background]."m";
+			$colored_text .= "\033[".static::$_background_colors[$background]."m";
 		}
 
 		$colored_text .= $text."\033[0m";
