@@ -9,13 +9,12 @@
  * @license   http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task_Info {
-
 	/**
 	 * Gets list of instances of [CLI_Task] class.
 	 * 
 	 *     $catalog = CLI_Task_Info::get_list();
 	 * 
-	 * @param  string $path path to root directory of tasks
+	 * @param  string $path Path to root directory of tasks
 	 * @return array
 	 */
 	public static function get_list($path = CLI_Tasker::DIR_ROOT)
@@ -50,7 +49,7 @@ abstract class Kohana_CLI_Task_Info {
 	 * 
 	 *     $info = CLI_Task_Info::get_info($name);
 	 * 
-	 * @param  string|object $name task name or instance of [CLI_Task] class
+	 * @param  string|object $name Task name or instance of [CLI_Task] class
 	 * @return array
 	 */
 	public static function get_info($name)
@@ -106,5 +105,4 @@ abstract class Kohana_CLI_Task_Info {
 
 		return $info;
 	}
-
 }

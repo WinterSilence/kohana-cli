@@ -9,9 +9,8 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Exception extends Kohana_Exception {
-
 	/**
-	 * Inline exception handler.
+	 * Inline exception handler:
 	 * 
 	 * - Display the error message, source of the exception
 	 * - Stack trace of the error
@@ -24,8 +23,8 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 	{
 		try
 		{
-			$error = $e instanceof CLI_Exception ? $e->_cli_text() : parent::text($e);
-			CLI::error($error);
+			$text = $e instanceof CLI_Exception ? $e->_cli_text() : static::text($e);
+			CLI::write($text, STDERR);
 
 			$exit_code = $e->getCode();
 			if ($exit_code == 0)
@@ -33,14 +32,17 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 				// Never exit '0' after an exception
 				$exit_code = 1;
 			}
-
 			exit($exit_code);
 		}
 		catch (Exception $e)
 		{
+			if (ob_get_level()) 
+			{
+				// Clear the output buffer
+				ob_clean();
+			}
 			// Display the exception text
-			CLI::error(parent::text($e));
-
+			CLI::write(static::text($e), STDERR);
 			// Exit with an error status
 			exit(1);
 		}
@@ -53,7 +55,6 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 	 */
 	protected function _cli_text()
 	{
-		return parent::text($this);
+		return self::text($this);
 	}
-
 }

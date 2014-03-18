@@ -10,19 +10,18 @@
  * @license   http://kohanaframework.org/license
  */
 class <?php echo $kohana_cli_class ?> extends CLI_Task_Template {
-
 	/**
-	 * @var string|object path to template or [View] object
+	 * @var string|object Path to template or [View] object
 	 */
 	protected $template = '<?php echo CLI_Tasker::class2path($kohana_cli_class) ?>';
 
 	/**
-	 * @var boolean auto render template
+	 * @var boolean Auto render template
 	 **/
 	protected $auto_render = TRUE;
 
 	/**
-	 * @var array task options as array of option name => default values
+	 * @var array Task options as array of option name => default values
 	 */
 	protected $options = array();
 
@@ -55,5 +54,4 @@ class <?php echo $kohana_cli_class ?> extends CLI_Task_Template {
 	{
 		// ...
 	}
-
 }

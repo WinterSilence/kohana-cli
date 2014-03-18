@@ -9,20 +9,21 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task {
-
 	/**
-	 * @var array presets for task options as array of option name => default values
+	 * @var array Presets for task options as array of option name => default values
 	 */
 	protected $options = array();
 
 	/**
 	 * Sets options values of task.
 	 * 
-	 * @param  array $options options values
+	 * @param  array $options Task options values
 	 * @return void
 	 */
 	public function __construct(array $options = array())
 	{
+		// Delete task name, it's used only for create task
+		unset($options['task']);
 		$this->options = array_merge($this->options, $options);
 	}
 
@@ -48,7 +49,8 @@ abstract class Kohana_CLI_Task {
 	protected function after() {}
 
 	/**
-	 * Executes the action and calls the [CLI_Task::before()] and [CLI_Task::after()] methods.
+	 * Executes the action and calls the [CLI_Task::before()]
+	 * and [CLI_Task::after()] methods.
 	 *
 	 * @return void
 	 */
@@ -61,5 +63,4 @@ abstract class Kohana_CLI_Task {
 		// Execute the after action method
 		$this->after();
 	}
-
 }

@@ -1,5 +1,5 @@
 {
-	"name":        "wintersilence/cli",
+	"name":        "wintersilence/kohana-cli",
 	"type":        "kohana-module",
 	"description": "The Kohana module for work in CLI",
 	"license":     "BSD-3-Clause",
@@ -19,7 +19,7 @@
 	"require": {
 		"composer/installers": "~1.0",
 		"kohana/core":         ">=3.3",
-		"php":                 ">=5.4"
+		"php":                 ">5.3.3"
 	},
 	"extra": {
 		"branch-alias": {

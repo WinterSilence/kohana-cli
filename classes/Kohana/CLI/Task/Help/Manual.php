@@ -10,7 +10,7 @@
  */
 abstract class Kohana_CLI_Task_Help_Manual extends CLI_Task_Template {
 	/**
-	 * @var array presets for task options as array of option name => default values
+	 * @var array Ppresets for task options as array of option name => default values
 	 */
 	protected $options = array('name' => '');
 
