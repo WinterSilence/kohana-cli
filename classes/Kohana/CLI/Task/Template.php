@@ -9,14 +9,13 @@
  * @license   http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task_Template extends CLI_Task {
-
 	/**
-	 * @var string|object path to template or [View] object
+	 * @var string|object Path to template or [View] object
 	 */
 	protected $template;
 
 	/**
-	 * @var boolean auto render template
+	 * @var boolean Auto render template
 	 **/
 	protected $auto_render = TRUE;
 
@@ -29,7 +28,7 @@ abstract class Kohana_CLI_Task_Template extends CLI_Task {
 	{
 		parent::before();
 
-		if ($this->auto_render === TRUE)
+		if ($this->auto_render)
 		{
 			if (empty($this->template))
 			{
@@ -48,7 +47,7 @@ abstract class Kohana_CLI_Task_Template extends CLI_Task {
 	 */
 	protected function after()
 	{
-		if ($this->auto_render === TRUE AND $this->template instanceof View)
+		if ($this->auto_render == TRUE AND $this->template instanceof View)
 		{
 			// Render and display template
 			CLI::write($this->template->render());
@@ -56,5 +55,4 @@ abstract class Kohana_CLI_Task_Template extends CLI_Task {
 
 		parent::after();
 	}
-
 }

@@ -9,9 +9,8 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task_Help_Scaffold extends CLI_Task {
-
 	/**
-	 * @var array presets for task options as array of option name => default values
+	 * @var array Presets for task options as array of option name => default values
 	 */
 	protected $options = array('name' => '', 'template' => '');
 
@@ -44,5 +43,4 @@ abstract class Kohana_CLI_Task_Help_Scaffold extends CLI_Task {
 		CLI_Task_Scaffold::create($this->options['name'], $this->options['template']);
 		CLI::write(__('Task `:name` created!', array(':name' => $this->options['name'])));
 	}
-
 }

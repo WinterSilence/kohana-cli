@@ -36,7 +36,7 @@ if (PHP_SAPI == 'cli')
 }
 ~~~
 
-For short call CLI tasks in Linix OS use `DOCROOT/cli` and `DOCROOT/cli_daemon`.
+For short call CLI tasks in Linix OS use `./cli` and `./cli_daemon`.
 
 For more information about usage, see module's user guide.
 

@@ -10,9 +10,8 @@
  * @license   http://kohanaframework.org/license
  */
 class <?php echo $kohana_cli_class ?> extends CLI_Task {
-
 	/**
-	 * @var array task options as array of option name => default values
+	 * @var array Task options as array of option name => default values
 	 */
 	protected $options = array();
 
@@ -45,5 +44,4 @@ class <?php echo $kohana_cli_class ?> extends CLI_Task {
 	{
 		// ...
 	}
-
 }

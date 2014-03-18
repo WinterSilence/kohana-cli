@@ -5,11 +5,11 @@
 <?php echo CLI::color($kohana_cli_task['name'].' ('.$kohana_cli_task['class'].')', 'black', 'light_gray') ?>
 -------------------------------------------------
 
-<?php echo CLI::color(__('Description'), 'light_gray') ?>
+<?php echo CLI::color(__('Class description'), 'light_gray') ?>
 -------------------------------------------------
     <?php echo $kohana_cli_task['description'] ?>
 
-<?php echo CLI::color(__('Options'), 'light_gray') ?>
+<?php echo CLI::color(__('CLI options'), 'light_gray') ?>
 -------------------------------------------------
 <?php 
 foreach ($kohana_cli_task['options'] as $option => $default)

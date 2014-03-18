@@ -9,9 +9,8 @@
  * @license    http://kohanaframework.org/license
  */
 abstract class Kohana_CLI_Task_Help_Manual extends CLI_Task_Template {
-
 	/**
-	 * @var array presets for task options as array of option name => default values
+	 * @var array Ppresets for task options as array of option name => default values
 	 */
 	protected $options = array('name' => '');
 
@@ -39,5 +38,4 @@ abstract class Kohana_CLI_Task_Help_Manual extends CLI_Task_Template {
 		$info = CLI_Task_Info::get_info($this->options['name']);
 		$this->template->set('kohana_cli_task', $info);
 	}
-
 }
