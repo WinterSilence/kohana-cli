@@ -190,7 +190,7 @@ abstract class Kohana_CLI {
 			}
 			else
 			{
-				$options_output = ' [ '.implode(', ', $options.' ]';
+				$options_output = ' [ '.implode(', ', $options).' ]';
 			}
 		}
 
