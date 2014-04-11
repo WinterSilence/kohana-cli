@@ -149,7 +149,7 @@ abstract class Kohana_CLI {
 		{
 			$handle = STDERR;
 		}
-		fwrite($handle, $text);
+		fwrite($handle, $text.PHP_EOL);
 	}
 
 	/**
