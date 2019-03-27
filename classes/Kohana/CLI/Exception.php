@@ -1,14 +1,15 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
 /**
  * CLI exception class.
  *
  * @package    Kohana/CLI
  * @category   Exception
  * @author     Kohana Team
- * @copyright  (c) 2009-2014 Kohana Team
+ * @copyright  (c) 2009-2018 Kohana Team
  * @license    http://kohanaframework.org/license
  */
-abstract class Kohana_CLI_Exception extends Kohana_Exception {
+abstract class Kohana_CLI_Exception extends Kohana_Exception
+{
 	/**
 	 * Inline exception handler:
 	 * 
@@ -16,10 +17,10 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 	 * - Stack trace of the error
 	 * - Write error in [Log]
 	 * 
-	 * @param  Exception $e 
+	 * @param  Throwable $e 
 	 * @return void
 	 */
-	public static function handler(Exception $e)
+	public static function handler(Throwable $e)
 	{
 		try
 		{
@@ -34,7 +35,7 @@ abstract class Kohana_CLI_Exception extends Kohana_Exception {
 			}
 			exit($exit_code);
 		}
-		catch (Exception $e)
+		catch (Throwable $e)
 		{
 			if (ob_get_level()) 
 			{
