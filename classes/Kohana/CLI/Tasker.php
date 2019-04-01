@@ -1,18 +1,18 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
 /**
- * Helper class, manage CLI tasks.
+ * Helper class to manage CLI tasks.
  *
  * @package    Kohana/CLI
- * @category   Helper
+ * @category   Helpers
  * @author     Kohana Team
- * @copyright  (c) 2009-2014 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE
  */
 abstract class Kohana_CLI_Tasker {
-	// Parent class of CLI tasks
+	// Parent class of tasks
 	const PARENT_CLASS = 'CLI_Task';
 
-	// Directory containing CLI tasks
+	// Directory containing tasks
 	const DIR_ROOT = 'classes/CLI/Task/';
 
 	/**
@@ -24,7 +24,7 @@ abstract class Kohana_CLI_Tasker {
 	 * Convert class to task name.
 	 * 
 	 *     echo CLI_Tasker::class2name('CLI_Task_DB_Migrate');
-	 *     // Result: 'db/migrate'
+	 *     // result: 'db/migrate'
 	 * 
 	 * @param  object|string $class Class name or [CLI_Task] object
 	 * @return string
@@ -40,12 +40,12 @@ abstract class Kohana_CLI_Tasker {
 		if ( ! is_subclass_of($class, static::PARENT_CLASS))
 		{
 			throw new CLI_Exception(
-				':method: class `:class` not extended `:parent`', 
-				array(
+				'Method `:method`: class `:class` not extended `:parent`.', 
+				[
 					':method' => __METHOD__, 
 					':class' => $class, 
 					':parent' => static::PARENT_CLASS
-				)
+				]
 			);
 		}
 
@@ -58,9 +58,9 @@ abstract class Kohana_CLI_Tasker {
 	 * Convert class to task path.
 	 * 
 	 *     echo CLI_Tasker::class2path('CLI_Task_DB_Migrate');
-	 *     // Result: 'cli/db/migrate'
+	 *     // result: 'cli/db/migrate'
 	 * 
-	 * @param  object|string $class Сlass name or or [CLI_Task] object
+	 * @param  object|string $class Сlass name or [CLI_Task] object
 	 * @return string
 	 */
 	public static function class2path($class)
@@ -73,7 +73,7 @@ abstract class Kohana_CLI_Tasker {
 	 * Convert name to task class.
 	 * 
 	 *     echo CLI_Tasker::name2class('db/migrate');
-	 *     // Result: 'CLI_Task_Db_Migrate'
+	 *     // result: 'CLI_Task_Db_Migrate'
 	 * 
 	 * @param  string $name Task name
 	 * @return string
@@ -84,8 +84,8 @@ abstract class Kohana_CLI_Tasker {
 		if (empty($name) OR ! is_string($name))
 		{
 			throw new CLI_Exception(
-				':method: wrong task name', 
-				array(':method' => __METHOD__)
+				'Method `:method`: wrong task name.', 
+				[':method' => __METHOD__]
 			);
 		}
 
@@ -104,9 +104,9 @@ abstract class Kohana_CLI_Tasker {
 	 * @return object Instance of [CLI_Task]
 	 * @throws CLI_Exception
 	 */
-	public static function factory($name = '', array $options = array())
+	public static function factory($name = '', array $options = [])
 	{
-		if (empty($name))
+		if ( ! $name)
 		{
 			// Use default name if task not set
 			$name = static::$default;
@@ -117,24 +117,22 @@ abstract class Kohana_CLI_Tasker {
 		if ( ! class_exists($class))
 		{
 			throw new CLI_Exception(
-				':method: class `:class` not exists', 
-				array(':method' => __METHOD__, ':class' => $class)
+				'Method `:method`: class `:class` not exists.', 
+				[':method' => __METHOD__, ':class' => $class]
 			);
 		}
 		elseif ( ! is_subclass_of($class, static::PARENT_CLASS))
 		{
 			throw new CLI_Exception(
-				':method: class `:class` not extended `:parent`', 
-				array(
+				'Method `:method`: class `:class` not extended `:parent`.', 
+				[
 					':method' => __METHOD__, 
-					':class' => $class, 
+					':class'  => $class, 
 					':parent' => static::PARENT_CLASS
-				)
+				]
 			);
 		}
-
-		$class = new $class($options);
-
-		return $class;
+		
+		return new $class($options);
 	}
 }
