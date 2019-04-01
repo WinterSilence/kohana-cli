@@ -1,12 +1,12 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
 /**
- * Abstract CLI task class, uses automatic templating [View].
+ * Basic CLI task class, uses automatic templating [View].
  *
  * @package   Kohana/CLI
- * @category  Task
+ * @category  Tasks
  * @author    Kohana Team
- * @copyright (c) 2013-2014 Kohana Team
- * @license   http://kohanaframework.org/license
+ * @copyright (c) Kohana Team
+ * @license   https://koseven.ga/LICENSE
  */
 abstract class Kohana_CLI_Task_Template extends CLI_Task {
 	/**
@@ -30,13 +30,13 @@ abstract class Kohana_CLI_Task_Template extends CLI_Task {
 
 		if ($this->auto_render)
 		{
-			if (empty($this->template))
+			if ( ! $this->template)
 			{
 				// Generate path to template from class name
 				$this->template = CLI_Tasker::class2path($this);
 			}
 			// Load the template
-			$this->template = View::factory($this->template);
+			$this->template = new View($this->template);
 		}
 	}
 
@@ -47,12 +47,12 @@ abstract class Kohana_CLI_Task_Template extends CLI_Task {
 	 */
 	protected function after()
 	{
+		parent::after();
+		
 		if ($this->auto_render == TRUE AND $this->template instanceof View)
 		{
 			// Render and display template
 			CLI::write($this->template->render());
 		}
-
-		parent::after();
 	}
 }
