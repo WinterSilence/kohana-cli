@@ -1,12 +1,12 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
 /**
- * Helper class, extracted information about CLI task.
+ * Helper class extracted information about CLI task.
  *
  * @package   Kohana/CLI
- * @category  Helper
+ * @category  Helpers
  * @author    Kohana Team
- * @copyright (c) 2009-2014 Kohana Team
- * @license   http://kohanaframework.org/license
+ * @copyright (c) Kohana Team
+ * @license   https://koseven.ga/LICENSE
  */
 abstract class Kohana_CLI_Task_Info {
 	/**
@@ -81,7 +81,7 @@ abstract class Kohana_CLI_Task_Info {
 		// Get class description and convert to display in CLI
 		$description = $inspector->getDocComment();
 		// Normalize all new lines to `\n`
-		$description = str_replace(array("\r\n", "\n"), "\n", $description);
+		$description = str_replace("\r", '', $description);
 		// Remove the phpdoc open\close tags and split
 		$description = array_slice(explode("\n", $description), 1, -1);
 		foreach ($description as $i => $line)
