@@ -1,18 +1,18 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php
 /**
- * Abstract CLI task class.
+ * Basic CLI task.
  *
  * @package    Kohana/CLI
- * @category   Task
+ * @category   Tasks
  * @author     Kohana Team
- * @copyright  (c) 2009-2014 Kohana Team
- * @license    http://kohanaframework.org/license
+ * @copyright  (c) Kohana Team
+ * @license    https://koseven.ga/LICENSE
  */
 abstract class Kohana_CLI_Task {
 	/**
 	 * @var array Presets for task options as array of option name => default values
 	 */
-	protected $options = array();
+	protected $options = [];
 
 	/**
 	 * Sets options values of task.
@@ -20,9 +20,9 @@ abstract class Kohana_CLI_Task {
 	 * @param  array $options Task options values
 	 * @return void
 	 */
-	public function __construct(array $options = array())
+	public function __construct(array $options = [])
 	{
-		// Delete task name, it's used only for create task
+		// Delete task name, it's used only for create task.
 		unset($options['task']);
 		$this->options = array_merge($this->options, $options);
 	}
@@ -32,25 +32,24 @@ abstract class Kohana_CLI_Task {
 	 *
 	 * @return void
 	 */
-	protected function before() {}
+	abstract protected function before();
 
 	/**
 	 * Task action.
 	 *
 	 * @return void
 	 */
-	protected function action() {}
+	abstract protected function action();
 
 	/**
 	 * Automatically executed after the task action.
 	 *
 	 * @return void
 	 */
-	protected function after() {}
+	abstract protected function after();
 
 	/**
-	 * Executes the action and calls the [CLI_Task::before()]
-	 * and [CLI_Task::after()] methods.
+	 * Executes the action and calls `before` and `after` methods.
 	 *
 	 * @return void
 	 */
