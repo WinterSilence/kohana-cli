@@ -1,6 +1,5 @@
 {
 	"name":        "wintersilence/kohana-cli",
-	"type":        "kohana-module",
 	"description": "The Kohana module for work in CLI",
 	"license":     "BSD-3-Clause",
 	"keywords":    ["kohana", "framework", "cli", "console", "task"],
