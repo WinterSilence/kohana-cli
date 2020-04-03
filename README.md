@@ -1,40 +1,36 @@
-Kohana CLI module
-==========
+# Kohana CLI module
 
-CLI module for Kohana framework 3.3 or high.
+CLI module for Kohana framework 3.x.
 
-Replaced basic `minion` module, for this change part of code in `DOCROOT/index.php`:
-~~~
+## Install
+
+Replace `minion` module in `DOCROOT/index.php`
+~~~php
 if (PHP_SAPI == 'cli')  {
-	// Try and load minion
-	class_exists('Minion_Task') || die('Please enable the Minion module for CLI support.');
-	set_exception_handler(['Minion_Exception', 'handler']);
-
-	Minion_Task::factory(Minion_CLI::options())->execute();
+  // replace this
 }
 ~~~
 to
+~~~php
+// Check whether the module is connected
+class_exists('CLI') || die('Please enable the `CLI` module.');
+// Change exception handler
+set_exception_handler(['CLI_Exception', 'handler']);
+
+// Set CLI options
+ignore_user_abort(TRUE);
+ini_set('cli_server.color', 'on');
+
+// Create and execute the main/initial task
+CLI_Tasker::factory(CLI::option('task'), CLI::option())->execute();
 ~~~
-if (PHP_SAPI == 'cli') {
-	// Check whether the module is connected
-	class_exists('CLI') || die('Please enable the `CLI` module.');
-	// Change exception handler
-	set_exception_handler(['CLI_Exception', 'handler']);
-	// Ignore user aborts
-	ignore_user_abort(TRUE);
-	// Enable to use ANSI color coding
-	ini_set('cli_server.color', 'on');
-	// Create and execute the main\initial task
-	CLI_Tasker::factory(CLI::option('task'), CLI::option())->execute();
-}
-~~~
 
-For short call CLI tasks in Linux OS use `./cli` and `./cli_daemon`.
+Use `./cli` and `./cli_daemon` to call CLI tasks in Linux.
 
-For more information about usage, see module's user guide.
+For more information about usage, see `guide`.
 
-### Distinctive features:
+## Features
 
 - Clean and documented code
-- Fixed memory leaks and incorrect output
-- Easy task for scaffolding
+- Fix memory leaks and incorrect output
+- Scaffold task
