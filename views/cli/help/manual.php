@@ -1,5 +1,3 @@
-<?php defined('SYSPATH') OR die('No direct script access.') ?>
-
 <?php if ( ! Fragment::load('cli_manual'.$kohana_cli_task['name'], 3600, TRUE)): ?>
 
 <?php echo CLI::color($kohana_cli_task['name'].' ('.$kohana_cli_task['class'].')', 'black', 'light_gray') ?>
