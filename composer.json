@@ -1,14 +1,14 @@
 {
 	"name":        "wintersilence/kohana-cli",
-	"type":        "kohana-module",
+	"type":        "package",
 	"description": "The Kohana module for work in CLI",
 	"license":     "BSD-3-Clause",
-	"keywords":    ["kohana", "framework", "cli", "console", "task"],
+	"keywords":    ["kohana", "module", "cli", "console", "task"],
 	"authors": [
 		{
 			"name":     "WinterSilence",
-			"email":    "info@handy-soft.ru",
-			"homepage": "http://handy-soft.ru",
+			"email":    "info@ensostudio.ru",
+			"homepage": "http://ensostudio.ru",
 			"role":     "developer"
 		}
 	],
@@ -17,14 +17,6 @@
 		"source": "http://github.com/wintersilence/kohana-cli"
 	},
 	"require": {
-		"composer/installers": "~1.0",
-		"kohana/core":         ">=3.3",
-		"php":                 ">5.3.3"
+		"php": ">=5.6"
 	},
-	"extra": {
-		"branch-alias": {
-			"dev-3.3/develop": "3.3.x-dev",
-			"dev-3.4/develop": "3.4.x-dev"
-		}
-	}
 }
