@@ -1,27 +1,26 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
-
-return array(
+<?php
+return [
 	// CLI:
-	'Invalid option value, try again' => 'Неверное значение опции, попробуйте еще раз',
-	':method: invalid foreground color `:color`' => ':method: неверный цвет текста `:color`',
-	':method: invalid background color `:color`' => ':method: неверный фоновый цвет `:color`',
+	'Invalid option value, try again' => 'РќРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РѕРїС†РёРё, РїРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·',
+	':method: invalid foreground color `:color`' => ':method: РЅРµРІРµСЂРЅС‹Р№ С†РІРµС‚ С‚РµРєСЃС‚Р° `:color`',
+	':method: invalid background color `:color`' => ':method: РЅРµРІРµСЂРЅС‹Р№ С„РѕРЅРѕРІС‹Р№ С†РІРµС‚ `:color`',
 	// CLI_Tasker:
-	':method: class `:class` not extended `:parent`' => ':method: класс `:class` не наследует `:parent`',
-	':method: wrong task name' => ':method: неверное имя задания',
-	':method: class `:class` not exists' => ':method: класс `:class` не существует',
+	':method: class `:class` not extended `:parent`' => ':method: РєР»Р°СЃСЃ `:class` РЅРµ РЅР°СЃР»РµРґСѓРµС‚ `:parent`',
+	':method: wrong task name' => ':method: РЅРµРІРµСЂРЅРѕРµ РёРјСЏ Р·Р°РґР°РЅРёСЏ',
+	':method: class `:class` not exists' => ':method: РєР»Р°СЃСЃ `:class` РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚',
 	// CLI_Task_Scaffold:
-	':method: can not create directory `:dir`' => ':method: невозможно создать директорию `:dir`',
-	':method: can not create file `:file`' => ':method: невозможно создать файл `:file`',
+	':method: can not create directory `:dir`' => ':method: РЅРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕР·РґР°С‚СЊ РґРёСЂРµРєС‚РѕСЂРёСЋ `:dir`',
+	':method: can not create file `:file`' => ':method: РЅРµРІРѕР·РјРѕР¶РЅРѕ СЃРѕР·РґР°С‚СЊ С„Р°Р№Р» `:file`',
 	// CLI_Task_Help_Scaffold:
-	'Task name' => 'Имя задания',
-	'Class template' => 'Шаблон класса',
-	'Task `:name` created!' => 'Задание `:name` создано!',
+	'Task name' => 'РРјСЏ Р·Р°РґР°РЅРёСЏ',
+	'Class template' => 'РЁР°Р±Р»РѕРЅ РєР»Р°СЃСЃР°',
+	'Task `:name` created!' => 'Р—Р°РґР°РЅРёРµ `:name` СЃРѕР·РґР°РЅРѕ!',
 	// views/help/list:
-	'List of CLI tasks' => 'Список CLI заданий',
-	'Default task' => 'Задание по умолчанию',
-	'Execute task' => 'Выполнить задание',
-	'Show task manual' => 'Показать описание задания',
+	'List of CLI tasks' => 'РЎРїРёСЃРѕРє CLI Р·Р°РґР°РЅРёР№',
+	'Default task' => 'Р—Р°РґР°РЅРёРµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ',
+	'Execute task' => 'Р’С‹РїРѕР»РЅРёС‚СЊ Р·Р°РґР°РЅРёРµ',
+	'Show task manual' => 'РџРѕРєР°Р·Р°С‚СЊ РѕРїРёСЃР°РЅРёРµ Р·Р°РґР°РЅРёСЏ',
 	// views/help/manual:
-	'Class description' => 'Описание класса',
-	'CLI options' => 'Опции CLI',
-);
+	'Class description' => 'РћРїРёСЃР°РЅРёРµ РєР»Р°СЃСЃР°',
+	'CLI options' => 'РћРїС†РёРё CLI',
+];
