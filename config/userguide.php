@@ -1,12 +1,11 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
-
-return array(
-	'modules' => array(
-		'cli' => array(
-			'enabled' => TRUE,
+<?php
+return [
+	'modules' => [
+		'cli' => [
+			'enabled' => true,
 			'name' => 'CLI',
-			'description' => 'CLI is a simple command-line task runner.',
-			'copyright' => '&copy; 2009-2014 Kohana Team',
-		),
-	),
-);
+			'description' => 'Simple command-line task runner',
+			'copyright' => '&copy; 2016-2020 WinterSilence',
+		],
+	],
+];
